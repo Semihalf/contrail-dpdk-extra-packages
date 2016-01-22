@@ -1,0 +1,31 @@
+Author: Andriy Berestovskyy <aber@semihalf.com>
+Date:   Wed Jan 13 16:48:44 2016 +0100
+
+    vhost-user: Add can receive handler
+
+diff --git a/net/vhost-user.c b/net/vhost-user.c
+--- a/net/vhost-user.c
++++ b/net/vhost-user.c
+@@ -131,6 +131,12 @@
+     }
+ }
+ 
++static int net_vhost_user_can_receive(void * opaque)
++{
++    /* TODO: add a real check */
++    return 1;
++}
++
+ static int net_vhost_user_init(NetClientState *peer, const char *device,
+                                const char *name, CharDriverState *chr)
+ {
+@@ -148,7 +154,8 @@
+     s->nc.receive_disabled = 1;
+     s->chr = chr;
+ 
+-    qemu_chr_add_handlers(s->chr, NULL, NULL, net_vhost_user_event, s);
++    qemu_chr_add_handlers(s->chr, net_vhost_user_can_receive, NULL,
++                                            net_vhost_user_event, s);
+ 
+     return 0;
+ }
