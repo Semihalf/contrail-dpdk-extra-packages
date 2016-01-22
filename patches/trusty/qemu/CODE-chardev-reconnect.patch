@@ -1,0 +1,18 @@
+Author: Andriy Berestovskyy <aber@semihalf.com>
+Date:   Fri Jan 8 17:44:33 2016 +0100
+
+    qemu-char: Add default reconnect time
+
+diff --git a/qemu-char.c b/qemu-char.c
+index 3200200..d956f8d 100644
+--- a/qemu-char.c
++++ b/qemu-char.c
+@@ -3511,7 +3511,7 @@
+     bool is_waitconnect = is_listen && qemu_opt_get_bool(opts, "wait", true);
+     bool is_telnet      = qemu_opt_get_bool(opts, "telnet", false);
+     bool do_nodelay     = !qemu_opt_get_bool(opts, "delay", true);
+-    int64_t reconnect   = qemu_opt_get_number(opts, "reconnect", 0);
++    int64_t reconnect   = qemu_opt_get_number(opts, "reconnect", 5);
+     const char *path = qemu_opt_get(opts, "path");
+     const char *host = qemu_opt_get(opts, "host");
+     const char *port = qemu_opt_get(opts, "port");
