@@ -1,0 +1,17 @@
+Author: Andriy Berestovskyy <aber@semihalf.com>
+Date:   Wed Jan 18 18:04:55 2016 +0100
+
+    Note: this change breaks few libvirt tests.
+
+diff -upr a/src/qemu/qemu_command.c b/src/qemu/qemu_command.c
+--- a/src/qemu/qemu_command.c
++++ b/src/qemu/qemu_command.c
+@@ -6614,7 +6614,7 @@
+                           "socket,id=char%s,path=%s%s",
+                           alias,
+                           dev->data.nix.path,
+-                          dev->data.nix.listen ? ",server,nowait" : "");
++                          dev->data.nix.listen ? ",server,nowait" : ",reconnect=5");
+         break;
+ 
+     case VIR_DOMAIN_CHR_TYPE_SPICEVMC:
